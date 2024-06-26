@@ -1,15 +1,15 @@
 { config, pkgs, lib, inputs, user, ... }:
 
 {
-  imports = [ 
-    # ./modules/jdk.nix 
+  imports = [
+    # ./modules/jdk.nix
     ./modules/config.nix
   ];
 
   home.username = user;
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "24.05";
-  
+
   programs.home-manager.enable = true;
 
   fonts.fontconfig.enable = true;
@@ -22,6 +22,7 @@
   };
 
   home.packages = with pkgs; [
+      cachix
       stow # TODO | Remove
       firefox
       kitty
@@ -58,14 +59,16 @@
       nix-prefetch-git
       jdk21
       gimp
+      unzip
+      wineWowPackages.stable
 
       vsce
         nodejs
         typescript
 
-      android-tools
-      sdkmanager
-      android-studio
+#      android-tools
+#      sdkmanager
+#      android-studio
 
       roboto
       open-sans
@@ -83,7 +86,7 @@
       (python3.withPackages (pkgs: with pkgs; [
         notify2 # displaywallpaper
         pyclip # screenshot
-        
+
         # steamgridsync
         beautifulsoup4
         selenium
@@ -92,8 +95,8 @@
         hyperlink
       ]))
 
-      (haskellPackages.ghcWithPackages (pkgs: with pkgs; [ 
-        cabal-install 
+      (haskellPackages.ghcWithPackages (pkgs: with pkgs; [
+        cabal-install
       ]))
 
     # # You can also create simple shell scripts directly inside your

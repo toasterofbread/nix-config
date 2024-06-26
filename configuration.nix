@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./cachix.nix
       inputs.home-manager.nixosModules.default
     ];
 
@@ -19,7 +20,7 @@
 
   time.timeZone = "Europe/London";
   services.xserver.xkb.layout = "us";
-#  services.gnome-keyring.enable = true
+#  services.gnome-keyring.enable = true;
 
   hardware.pulseaudio.enable = true;
 
@@ -37,6 +38,7 @@
     enableBashIntegration = false;
     enableZshIntegration = false;
   };
+  programs.adb.enable = true;
 
 #  programs.nix-ld.enable = true;
 #  programs.nix-ld.libraries = with pkgs; [
@@ -47,7 +49,7 @@
   users.users.${user} = {
     isNormalUser = true;
     initialPassword = "password";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "plugdev" "adbusers" ];
     shell = pkgs.fish;
   };
 
@@ -85,7 +87,7 @@
       setSocketVariable = true;
     };
   };
-  
+
   virtualisation.arion = {
     backend = "docker";
     projects = {
@@ -94,7 +96,7 @@
         services = {
           "server".service = {
             image = "mujx/hakatime:v1.7.3";
-            environment = { 
+            environment = {
               HAKA_DB_HOST = "haka_db";
               HAKA_DB_PORT = 5432;
               HAKA_DB_NAME = "test";
@@ -130,6 +132,11 @@
       };
     };
   };
+
+  # adb
+#  services.udev.extraRules = ''
+#    SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee4", MODE="0666", GROUP="plugdev"  >
+#  '';
 
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05";

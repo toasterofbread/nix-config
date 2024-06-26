@@ -7,7 +7,7 @@ end
 # NixOS
 alias rebuild="sudo nixos-rebuild switch --flake /etc/nixos"
 alias dev="clear && nix develop -c fish"
-alias killnix="sudo systemctl restart nix-daemon.service && sudo nix-store --gc"
+alias killnix="sudo systemctl restart nix-daemon.service"
 alias fixnix="sudo nix-store --verify --check-contents --repair"
 alias locate="nix-locate --top-level -w"
 
@@ -21,7 +21,7 @@ alias releasenotes="git log --reverse --pretty=format:'- %s%b%n' "
 # I cannot fucking find where this sigsegv happens
 #alias spms="gdb -ex run spms"
 
-#alias spmplog="adb logcat | grep --color=never -F (adb shell ps | grep com.toasterofbread.spmp.debug | tr -s [:space:] ' ' | cut -d' ' -f2)"
+alias spmplog="adb logcat | grep --color=never -F (adb shell ps | grep com.toasterofbread.spmp.debug | tr -s [:space:] ' ' | cut -d' ' -f2)"
 #alias spmplogrelease="adb logcat | grep --color=never -F (adb shell ps | grep com.toasterofbread.spmp | tr -s [:space:] ' ' | cut -d' ' -f2)"
 alias song="cd ~/Desktop/曲 && ~/bin/song"
 alias fleet="JAVA_HOME=/usr/lib/jvm/java-17-openjdk jetbrains-fleet"

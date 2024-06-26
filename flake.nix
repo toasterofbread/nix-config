@@ -12,15 +12,15 @@
     arion.url = "github:toasterofbread/arion?ref=51fef9a931cd88a635cb90eeebaf5ed095b1b93c";
   };
 
-  outputs = { self, nixpkgs, home-manager, catppuccin, arion, ... }@inputs:  
-    let 
+  outputs = { self, nixpkgs, home-manager, catppuccin, arion, ... }@inputs:
+    let
       host = "nixos-prime";
       system = "x86_64-linux";
       user = "toaster";
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      nixosConfigurations.${host} = nixpkgs.lib.nixosSystem { 
+      nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs user; };
         modules = [
           ./configuration.nix
