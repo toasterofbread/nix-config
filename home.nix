@@ -1,4 +1,5 @@
-{ config, pkgs, lib, inputs, user, ... }:
+
+{ config, pkgs, lib, inputs, user, flake-inputs, ... }:
 
 {
   imports = [
@@ -23,15 +24,18 @@
 
   home.packages = with pkgs; [
       cachix
+      alsa-utils
       stow # TODO | Remove
       firefox
       kitty
       neofetch
-      gnome.nautilus
-      gnome.eog
-      gnome.file-roller
-      gnome.gnome-system-monitor
-#      gedit
+      onefetch
+      nautilus
+      eog
+      file-roller
+      gnome-system-monitor
+      gnome-disk-utility
+      gedit
       waybar
       htop
       pavucontrol
@@ -42,7 +46,7 @@
       swaybg
       mpvpaper
       ffmpeg
-      rofi
+      wofi
       socat
       mpv
       slurp
@@ -51,6 +55,17 @@
       docker-compose
       pinta
       sqlitebrowser
+      flatpak-builder
+#      gparted
+      ollama
+      nvtop
+      amdvlk
+      appimagekit
+      appstream
+      zsync
+      patchelf
+#      pkg-config
+
       prismlauncher
       qbittorrent
       yt-dlp
@@ -61,6 +76,13 @@
       gimp
       unzip
       wineWowPackages.stable
+#      (lutris.override {
+#        extraLibraries = pkgs: [
+#          libadwaita
+#          gtk4
+#          pango
+#        ];
+#      })
 
       vsce
         nodejs
@@ -68,7 +90,7 @@
 
 #      android-tools
 #      sdkmanager
-#      android-studio
+      android-studio
 
       roboto
       open-sans
@@ -77,7 +99,7 @@
       font-awesome
 
       xdg-utils
-      gnome.gnome-keyring
+      gnome-keyring
       lxde.lxsession
       dunst
       libnotify
@@ -92,12 +114,22 @@
         selenium
         pillow
         requests
-        hyperlink
+        hyperlink        
+
+        # flatpak-builder-tools/gradle
+        aiohttp
+        xmltodict
+
+        # toasterofbread/flatpak-repo
+        lxml
       ]))
 
       (haskellPackages.ghcWithPackages (pkgs: with pkgs; [
         cabal-install
       ]))
+
+      inputs.spmp.packages.${system}.default
+      inputs.spms.packages.${system}.default
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -110,32 +142,33 @@
   catppuccin.enable = true;
   catppuccin.flavor = "mocha";
   catppuccin.accent = "mauve";
-#  gtk.catppuccin.enable = true;
-#  gtk.catppuccin.gnomeShellTheme = true;
+  gtk.enable = true;
+  gtk.catppuccin.enable = true;
+  gtk.catppuccin.gnomeShellTheme = true;
 
-  gtk = {
-    enable = true;
-    catppuccin = {
-      gnomeShellTheme = true;
-      size = "standard";
-      accent = "mauve";
-    };
-    theme = {
-      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        variant = "mocha";
-        size = "standard";
-        accents = [ "mauve" ];
-        tweaks = [ "normal" ];
-      };
-    };
-  };
+#  gtk = {
+#    enable = true;
+#    catppuccin = {
+#      enable = true;
+#      gnomeShellTheme = true;
+#      size = "standard";
+#      accent = "mauve";
+#    };
+#    theme = {
+#      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
+#      package = pkgs.catppuccin-gtk.override {
+#        variant = "mocha";
+#        size = "standard";
+#        accents = [ "mauve" ];
+#        tweaks = [ "normal" ];
+#      };
+#    };
+#  };
   xdg.configFile = {
     "gtk-4.0/assets".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
     "gtk-4.0/gtk.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
     "gtk-4.0/gtk-dark.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
   };
-
   home.file = {
     ".config/mpv/input.conf".text = ''
       ALT+j add sub-scale -0.1

@@ -22,7 +22,7 @@ alias releasenotes="git log --reverse --pretty=format:'- %s%b%n' "
 #alias spms="gdb -ex run spms"
 
 alias spmplog="adb logcat | grep --color=never -F (adb shell ps | grep com.toasterofbread.spmp.debug | tr -s [:space:] ' ' | cut -d' ' -f2)"
-#alias spmplogrelease="adb logcat | grep --color=never -F (adb shell ps | grep com.toasterofbread.spmp | tr -s [:space:] ' ' | cut -d' ' -f2)"
+alias spmplogrelease="adb logcat | grep --color=never -F (adb shell ps | grep com.toasterofbread.spmp | tr -s [:space:] ' ' | cut -d' ' -f2)"
 alias song="cd ~/Desktop/曲 && ~/bin/song"
 alias fleet="JAVA_HOME=/usr/lib/jvm/java-17-openjdk jetbrains-fleet"
 
@@ -68,7 +68,7 @@ alias lite-xl="SDL_VIDEODRIVER=wayland /usr/bin/lite-xl"
 alias lite="SDL_VIDEODRIVER=wayland /usr/bin/lite-xl"
 alias commit="SDL_VIDEODRIVER=wayland /usr/bin/lite-xl ~/Desktop/Commit"
 alias amen="git add . && git status && gitsummary"
-alias gedit="gedit -s"
+#alias gedit="gedit -s"
 
 #alias python=python3.11
 #alias python3=python3.8
