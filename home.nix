@@ -22,11 +22,14 @@
       ];
   };
 
+#  nixpkgs.overlays = [ (import ./overlays/firefox.nix) ];
+
   home.packages = with pkgs; [
       cachix
       alsa-utils
       stow # TODO | Remove
-      firefox
+      latest.firefox-nightly-bin
+#      firefox
       kitty
       neofetch
       onefetch
@@ -57,7 +60,7 @@
       sqlitebrowser
       flatpak-builder
 #      gparted
-      ollama
+      ollama-rocm
       nvtop
       amdvlk
       appimagekit

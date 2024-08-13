@@ -2,7 +2,8 @@
   description = "flake.nix";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=084f6a3e260a9576c955137ff44b2e6d4fac6891";
+#    nixpkgs.url = "github:nixos/nixpkgs?ref=084f6a3e260a9576c955137ff44b2e6d4fac6891";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=fcaf39b0e7c456b469a50eb4ebc36a41687f08bf";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,17 +20,17 @@
 
     # v0.41.1
 #    nixpkgs-hyprland.url = "github:nixos/nixpkgs?ref=efb39c6052f3ce51587cf19733f5f4e5d515aa13";
+   
+    catppuccin.url = "github:catppuccin/nix?ref=8bdb55cc1c13f572b6e4307a3c0d64f1ae286a4f";
+    arion.url = "github:toasterofbread/arion?ref=51fef9a931cd88a635cb90eeebaf5ed095b1b93c";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
 
-    # catppuccin.url = "github:catppuccin/nix?ref=8bdb55cc1c13f572b6e4307a3c0d64f1ae286a4f";
-    # arion.url = "github:toasterofbread/arion?ref=51fef9a931cd88a635cb90eeebaf5ed095b1b93c";
-    # nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
-
-    # spmp.url = "github:toasterofbread/spmp?ref=2dc3ee2cee314f3e199d456717a0e3e4ddf58632";
-    # spms.url = "github:toasterofbread/spmp-server?ref=34470d61fd53109fde1869480b4943ed721fccfd";
+#    spmp.url = "github:toasterofbread/spmp/v0.4.0-RC6";
+    spmp.url = "github:toasterofbread/spmp?ref=9de5433e09595a199a21b8ca6fa732c98a73a327";
+    spms.url = "github:toasterofbread/spmp-server?ref=34470d61fd53109fde1869480b4943ed721fccfd";
   };
 
-  # outputs = { self, nixpkgs, home-manager, catppuccin, arion, nix-flatpak, spmp, spms, ... }@inputs:
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, catppuccin, arion, nix-flatpak, spmp, spms, ... }@inputs:
     let
       host = "nixos-prime";
       system = "x86_64-linux";
@@ -42,9 +43,9 @@
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
-          # catppuccin.nixosModules.catppuccin
-          # arion.nixosModules.arion
-          # nix-flatpak.nixosModules.nix-flatpak
+          catppuccin.nixosModules.catppuccin
+          arion.nixosModules.arion
+          nix-flatpak.nixosModules.nix-flatpak
         ];
       };
 

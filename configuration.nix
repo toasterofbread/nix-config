@@ -5,12 +5,13 @@
   imports =
     [
       ./hardware-configuration.nix
-#      ./cachix.nix
+      ./cachix.nix
       inputs.home-manager.nixosModules.default
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ (import /etc/nixos/overlays/firefox.nix) ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -22,7 +23,7 @@
 
   time.timeZone = "Europe/London";
   services.xserver.xkb.layout = "us";
-  services.gnome-keyring.enable = true;
+#  services.gnome-keyring.enable = true;
 
   hardware.pulseaudio.enable = true;
 
@@ -101,8 +102,8 @@
      extraSpecialArgs = { inherit inputs user; };
      users.${user} = {
        imports = [
-#         ./home.nix
-#         inputs.catppuccin.homeManagerModules.catppuccin
+         ./home.nix
+         inputs.catppuccin.homeManagerModules.catppuccin
        ];
      };
    };
@@ -118,6 +119,8 @@
      gdb
      gcc
      gnumake
+     nix-index
+     latest.firefox-nightly-bin
 
      (pkgs.buildFHSUserEnv {
        name = "fhs";
@@ -127,6 +130,7 @@
  #    gnome.gnome-shell
  #    gnome.gnome-session
    ];
+
  #  services.xserver.displayManager.sessionPackages = [ pkgs.gnome.gnome-session.sessions ];
    virtualisation.libvirtd = {
      enable = true;
@@ -152,50 +156,50 @@
      };
    };
 
-   virtualisation.arion = {
-     backend = "docker";
-     projects = {
-       "hakatime".rootless = true;
-       "hakatime".settings = {
-         services = {
-           "server".service = {
-             image = "mujx/hakatime:v1.7.3";
-             environment = {
-               HAKA_DB_HOST = "haka_db";
-               HAKA_DB_PORT = 5432;
-               HAKA_DB_NAME = "test";
-               HAKA_DB_PASS = "test";
-               HAKA_DB_USER = "test";
+#   virtualisation.arion = {
+#     backend = "docker";
+#     projects = {
+#       "hakatime".rootless = true;
+#       "hakatime".settings = {
+#         services = {
+#           "server".service = {
+#             image = "mujx/hakatime:v1.7.3";
+#             environment = {
+#               HAKA_DB_HOST = "haka_db";
+#               HAKA_DB_PORT = 5432;
+#               HAKA_DB_NAME = "test";
+#               HAKA_DB_PASS = "test";
+#               HAKA_DB_USER = "test";
+#
+#               HAKA_BADGE_URL = "http://localhost:8080";
+#               HAKA_PORT = 8080;
+#               HAKA_ENABLE_REGISTRATION = "true";
+#               HAKA_SESSION_EXPIRY = "24";
+#             };
+#             ports = [
+#               "8080:8080"
+#             ];
+#           };
+#           "haka_db".service = {
+#             image = "postgres:12-alpine";
+#             container_name = "haka_db";
+#             environment = {
+#               POSTGRES_DB = "test";
+#               POSTGRES_PASSWORD = "test";
+#               POSTGRES_USER = "test";
+#             };
+#             volumes = [
+#               "deploy_db_data:/var/lib/postgresql/data"
+#             ];
+#           };
+#         };
 
-               HAKA_BADGE_URL = "http://localhost:8080";
-               HAKA_PORT = 8080;
-               HAKA_ENABLE_REGISTRATION = "true";
-               HAKA_SESSION_EXPIRY = "24";
-             };
-             ports = [
-               "8080:8080"
-             ];
-           };
-           "haka_db".service = {
-             image = "postgres:12-alpine";
-             container_name = "haka_db";
-             environment = {
-               POSTGRES_DB = "test";
-               POSTGRES_PASSWORD = "test";
-               POSTGRES_USER = "test";
-             };
-             volumes = [
-               "deploy_db_data:/var/lib/postgresql/data"
-             ];
-           };
-         };
-
-         docker-compose.volumes = {
-           "deploy_db_data" = {};
-         };
-       };
-     };
-   };
+#         docker-compose.volumes = {
+#           "deploy_db_data" = {};
+#         };
+#       };
+#     };
+#   };
 
   # adb
   services.udev.extraRules = ''
@@ -205,3 +209,4 @@
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05";
 }
+
