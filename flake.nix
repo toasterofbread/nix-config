@@ -10,7 +10,9 @@
     };
 
 #    hyprland = {
-#      url = "github:hyprwm/Hyprland?submodules=1&ref=360ede79d124ffdeebbe8401f1ac4bc0dbec2c91";
+#      type = "git";
+#      url = "https://github.com/hyprwm/Hyprland?ref=v0.43.0";
+#      submodules = true;
 #      inputs.nixpkgs.follows = "nixpkgs";
 #    };
 
@@ -18,15 +20,15 @@
 # Working: 0.36.0 0.37.1 (i think?) 0.38.1
 # Broken: 0.40.0 0.41.1 0.41.2 [Apr 24 4540d8c] [Apr 19 b52a49b] 0.39.1 0.39.0
 
-    # v0.41.1
-#    nixpkgs-hyprland.url = "github:nixos/nixpkgs?ref=efb39c6052f3ce51587cf19733f5f4e5d515aa13";
-   
+    # v0.43.0
+#    nixpkgs-hyprland.url = "github:nixos/nixpkgs?ref=d9d07251f12399413e6d33d5875a6f1994ef75a7";
+
     catppuccin.url = "github:catppuccin/nix?ref=8bdb55cc1c13f572b6e4307a3c0d64f1ae286a4f";
     arion.url = "github:toasterofbread/arion?ref=51fef9a931cd88a635cb90eeebaf5ed095b1b93c";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
 
-#    spmp.url = "github:toasterofbread/spmp/v0.4.0-RC6";
-    spmp.url = "github:toasterofbread/spmp?ref=9de5433e09595a199a21b8ca6fa732c98a73a327";
+    spmp.url = "github:toasterofbread/spmp/v0.4.0";
+#    spmp.url = "github:toasterofbread/spmp?ref=9de5433e09595a199a21b8ca6fa732c98a73a327";
     spms.url = "github:toasterofbread/spmp-server?ref=34470d61fd53109fde1869480b4943ed721fccfd";
   };
 

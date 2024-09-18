@@ -36,7 +36,7 @@
    programs.fish.enable = true;
    programs.hyprland = {
      enable = true;
- #    package = inputs.hyprland.packages.${system}.hyprland;
+#     package = inputs.hyprland.packages.${system}.hyprland-legacy-renderer;
    };
    programs.steam.enable = true;
    security.polkit.enable = true;
@@ -55,15 +55,15 @@
      rocmOverrideGfx = "10.3.0";
    };
 
-#   services.xserver = {
-#     enable = false;
-# #    autorun = false; # Doesn't work?
-#     displayManager.gdm = {
-#       enable = true;
-#       wayland = true;
-#     };
-#     desktopManager.gnome.enable = true;
-#   };
+   services.xserver = {
+     enable = false;
+     autorun = false; # Doesn't work?
+     displayManager.gdm = {
+       enable = true;
+       wayland = true;
+     };
+     desktopManager.gnome.enable = true;
+   };
 
    xdg.portal.enable = true;
 
@@ -80,6 +80,7 @@
        { appId = "dev.toastbits.spmp"; origin = "toastbits";  }
        { appId = "dev.toastbits.spmp-server"; origin = "toastbits";  }
        { appId = "moe.launcher.the-honkers-railway-launcher"; origin = "moe"; }
+       { appId = "org.flatpak.Builder"; origin = "flathub"; }
      ];
    };
 
@@ -92,7 +93,7 @@
    users.users.${user} = {
      isNormalUser = true;
      initialPassword = "password";
-     extraGroups = [ "wheel" "plugdev" "adbusers" "libvirtd" ];
+     extraGroups = [ "wheel" "plugdev" "adbusers" "libvirtd" "vboxusers" "seat" "video" ];
      shell = pkgs.fish;
    };
 
@@ -132,7 +133,9 @@
    ];
 
  #  services.xserver.displayManager.sessionPackages = [ pkgs.gnome.gnome-session.sessions ];
-   virtualisation.libvirtd = {
+   
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.libvirtd = {
      enable = true;
      qemu = {
        package = pkgs.qemu_kvm;

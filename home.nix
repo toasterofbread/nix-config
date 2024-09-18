@@ -1,5 +1,5 @@
 
-{ config, pkgs, lib, inputs, user, flake-inputs, ... }:
+{ config, pkgs, lib, inputs, user, flake-inputsr, ... }:
 
 {
   imports = [
@@ -38,6 +38,7 @@
       file-roller
       gnome-system-monitor
       gnome-disk-utility
+      video-trimmer
       gedit
       waybar
       htop
@@ -68,6 +69,11 @@
       zsync
       patchelf
 #      pkg-config
+#      virtualbox
+      appimage-run
+      binwalk
+      bless
+      ryujinx
 
       prismlauncher
       qbittorrent
@@ -79,6 +85,8 @@
       gimp
       unzip
       wineWowPackages.stable
+      winetricks
+      exiftool
 #      (lutris.override {
 #        extraLibraries = pkgs: [
 #          libadwaita
@@ -107,6 +115,8 @@
       dunst
       libnotify
       #replay-sorcery
+
+      protontricks
 
       (python3.withPackages (pkgs: with pkgs; [
         notify2 # displaywallpaper
