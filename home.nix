@@ -74,6 +74,9 @@
       binwalk
       bless
       ryujinx
+      alvr
+      playerctl
+      apksigcopier
 
       prismlauncher
       qbittorrent

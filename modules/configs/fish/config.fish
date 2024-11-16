@@ -69,6 +69,7 @@ alias lite="SDL_VIDEODRIVER=wayland /usr/bin/lite-xl"
 alias commit="SDL_VIDEODRIVER=wayland /usr/bin/lite-xl ~/Desktop/Commit"
 alias amen="git add . && git status && gitsummary"
 #alias gedit="gedit -s"
+alias gputop="nvtop"
 
 #alias python=python3.11
 #alias python3=python3.8

@@ -3,7 +3,7 @@
 
   inputs = {
 #    nixpkgs.url = "github:nixos/nixpkgs?ref=084f6a3e260a9576c955137ff44b2e6d4fac6891";
-    nixpkgs.url = "github:nixos/nixpkgs?ref=fcaf39b0e7c456b469a50eb4ebc36a41687f08bf";
+    nixpkgs.url = "github:toasterofbread/nixpkgs?ref=9819df87589a6a00dccd6e76638cf92877c1a110";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
