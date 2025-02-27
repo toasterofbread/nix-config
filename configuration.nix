@@ -25,13 +25,28 @@
   services.xserver.xkb.layout = "us";
 #  services.gnome-keyring.enable = true;
 
-  hardware.pulseaudio.enable = true;
+#  hardware.pulseaudio.enable = true;
+#  services.pipewire.enable = false;
 
   services.udisks2.enable = true;
   services.gvfs.enable = true;
   services.postgresql.enable = true;
   networking.firewall.enable = false;
   environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
+
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+     enable = true;
+     enableSSHSupport = true;
+     pinentryPackage = pkgs.pinentry-gtk2;
+  };
+
+    services.sunshine = {
+      enable = true;
+      autoStart = true;
+      capSysAdmin = true;
+      openFirewall = true;  
+    };
 
    programs.fish.enable = true;
    programs.hyprland = {
@@ -79,7 +94,7 @@
      packages = [
        { appId = "dev.toastbits.spmp"; origin = "toastbits";  }
        { appId = "dev.toastbits.spmp-server"; origin = "toastbits";  }
-       { appId = "moe.launcher.the-honkers-railway-launcher"; origin = "moe"; }
+#       { appId = "moe.launcher.the-honkers-railway-launcher"; origin = "moe"; }
        { appId = "org.flatpak.Builder"; origin = "flathub"; }
      ];
    };
@@ -122,9 +137,29 @@
      gnumake
      nix-index
      latest.firefox-nightly-bin
+     gnupg
+     pinentry-gtk2
 
      (pkgs.buildFHSUserEnv {
        name = "fhs";
+       targetPkgs = pkgs: (with pkgs; [
+	# Compose / SpMp
+        libglvnd
+        xorg.libX11
+        xorg.libXi
+        xorg.libXrender
+        fontconfig
+        mpv
+        vulkan-loader
+        xorg.libXtst
+        apksigcopier
+
+        # Webview
+        at-spi2-atk
+        cups.lib
+        mesa
+        pango
+       ]);
      })
 
      # TEMP

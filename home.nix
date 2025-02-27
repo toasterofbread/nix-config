@@ -29,6 +29,7 @@
       alsa-utils
       stow # TODO | Remove
       latest.firefox-nightly-bin
+#      chromium
 #      firefox
       kitty
       neofetch
@@ -72,11 +73,15 @@
 #      virtualbox
       appimage-run
       binwalk
-      bless
+#      bless
       ryujinx
       alvr
       playerctl
       apksigcopier
+#      jetbrains-toolbox
+      libreoffice-qt
+      gpu-screen-recorder
+      scrcpy
 
       prismlauncher
       qbittorrent
@@ -121,6 +126,15 @@
 
       protontricks
 
+      mitmproxy
+   
+      (retroarch.override {
+        cores = with libretro; [
+          snes9x
+          mgba
+        ];
+      })
+
       (python3.withPackages (pkgs: with pkgs; [
         notify2 # displaywallpaper
         pyclip # screenshot
@@ -145,7 +159,7 @@
       ]))
 
       inputs.spmp.packages.${system}.default
-      inputs.spms.packages.${system}.default
+#      inputs.spms.packages.${system}.default
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your

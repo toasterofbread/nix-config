@@ -42,6 +42,7 @@ alias cloneb="git clone --single-branch -b "
 alias g=git
 alias gs="git status"
 alias gits="git status"
+alias noci="git push -o ci.skip"
 alias c="clear ; printf '\033[2J\033[3J\033[1;1H'"
 #alias aur="sudo pacman -Sy && mkdir -p /home/toaster/Downloads/AUR && env --chdir=/home/toaster/Downloads/AUR pkgbuilder"
 #alias aurclean="rm -rf /home/toaster/Downloads/AUR"
